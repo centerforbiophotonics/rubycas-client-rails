@@ -26,6 +26,10 @@ module RubyCAS
         @@client = CASClient::Client.new(@@config)
         @@log = @@client.log
       end
+
+      def before(controller)
+        self.filter controller
+      end
       
       def filter(controller)
         raise "Cannot use the CASClient filter because it has not yet been configured." if config.nil?
